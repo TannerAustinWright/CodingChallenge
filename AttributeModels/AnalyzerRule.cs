@@ -5,7 +5,6 @@ namespace CodingChallenge.AttributeModels
     public class AnalyzerRule
     {
         public string Key { get; set; }
-        public string Flags { get; set; }
         public List<KeyWeight> Rules { get; set; }
     }
 

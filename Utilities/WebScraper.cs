@@ -15,7 +15,12 @@ namespace CodingChallenge.Utilities
         {
             this.requestAttribute = requestAttribute;
         }
-
+        /// <summary>
+        /// Sends an Http request to get pages of reviews for a specific URL, and number of
+        /// subsequent pages. This method is specifically for review endpoints of DealerRater
+        /// web urls.
+        /// </summary>
+        /// <returns> The HTML content of all pages concatenated into a single string. </returns>
         public string getHTML()
         {
             string html = "";
@@ -50,6 +55,12 @@ namespace CodingChallenge.Utilities
             return html;
         }
 
+        /// <summary>
+        /// Calls the getHTML() function retreiving the HTML string of desired webpages, extracts all
+        /// <p> tags wich contain the class 'review-content', and formats the content of the tag as a JSON
+        /// object that mimics the representation of the DealerRater API.
+        /// </summary>
+        /// <returns> The review data from the desired pages in a JSON formatted string. </returns>
         public string getJSON()
         {
             // Use getHtml() to requset the text of all pages in a single string.
