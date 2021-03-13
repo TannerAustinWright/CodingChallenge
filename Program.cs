@@ -16,8 +16,9 @@ namespace CodingChallenge
             List<AnalyzerRule> analyzerAttrs;
             RequestAttribute requestAttr;
             JsonSource json;
-            JsonAnalyzer jsonAnalyzer;
+            JsonAnalyzer<Review> jsonAnalyzer;
 
+            //  Opend and read the JSON files containing the requset and JSON analyzer settings.
             using (StreamReader reader = new StreamReader(attrList[0]))
             {
                 analyzerAttrs = JsonConvert.DeserializeObject<List<AnalyzerRule>>(reader.ReadToEnd());
@@ -27,24 +28,38 @@ namespace CodingChallenge
                 requestAttr = JsonConvert.DeserializeObject<RequestAttribute>(reader.ReadToEnd());
             }
 
+            //  Determine whether or not we can use the api to get the reviews. (APIConnection could
+            //  not be implemented because I was unable to obtain an access token.
             if (!requestAttr.API)
             {
                 json = new WebScraper(requestAttr);
             }
             else
             {
-                json = new APIConnection(requestAttr);
+                //json = new APIConnection(requestAttr);
+                Console.WriteLine("Error: Non-WebScraper method not suppoerted.");
+                Console.ReadKey();
+                return;
             }
 
-            jsonAnalyzer = new JsonAnalyzer(analyzerAttrs);
+            //  Initialize the analyzer with the desired analysys rules.
+            jsonAnalyzer = new JsonAnalyzer<Review>(analyzerAttrs);
 
-            jsonAnalyzer.run(json.getJSON());
+            //  Extract the list of reviews from the json string by deserializing the object.
+            List<Review> reviews = JsonConvert.DeserializeObject<ReviewCollection>(json.getJSON()).reviews;
 
-            foreach(KeyValuePair<Review, int> kvp in jsonAnalyzer.getTop(50))
+            //  Run the analyzer passing the reviews as a JSON object string imitating the format of 
+            //  the API response (in case future implementation is possible).
+            jsonAnalyzer.runRules(JsonConvert.SerializeObject(reviews));
+
+            //  Get the results from the analyzer object and output them to the console.
+            foreach(KeyValuePair<Review, int> kvp in jsonAnalyzer.getTop(3))
             {
                 Console.WriteLine($"Positivity Score: {kvp.Value}\nReview:");
                 Console.WriteLine($"{kvp.Key.comments}\n");
             }
+
+            // Wait.
             Console.ReadKey();
         }
     }

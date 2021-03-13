@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace CodingChallenge.Utilities
 {
-    class WebScraper : JsonSource
+    public class WebScraper : JsonSource
     {
         private RequestAttribute requestAttribute;
 
@@ -33,11 +33,8 @@ namespace CodingChallenge.Utilities
             {
                 // If the index of the page is zero the page has no additional endpoint appended. 
                 // If the index is 1 or greater append the correct endpoint to the URL with a 1 based index.
-                string endpoint;
-                if (i == 0)
-                {
-                    endpoint = "";
-                } else
+                string endpoint = "";
+                if (i != 0)
                 {
                     endpoint = $"/page{i + 1}";
                 }
