@@ -88,7 +88,7 @@ namespace CodingChallenge.Utilities
             //  Convert the JSON string into objects.
             collection = JsonConvert.DeserializeObject<List<t>>(jsonString);
 
-            //  For each review, run each included rule on the review and assign it a score.
+            //  For each ojbect, run each included rule on the review and assign it a score.
             foreach(t item in collection)
             {
                 int totalScore = 0;

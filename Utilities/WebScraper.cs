@@ -1,5 +1,6 @@
 ﻿using CodingChallenge.AttributeModels;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -40,12 +41,19 @@ namespace CodingChallenge.Utilities
                 }
                 // Request the page at the endpoint, read the text from the response as a string, and
                 // append it to the HTML string to return.
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestAttribute.URL + endpoint);
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
+                try
                 {
-                    html += reader.ReadToEnd();
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestAttribute.URL + endpoint);
+                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        html += reader.ReadToEnd();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Scraping multiple pages is only supported for DealerRater URL's");
                 }
             }
 
