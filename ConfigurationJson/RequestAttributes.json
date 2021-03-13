@@ -1,0 +1,12 @@
+﻿{
+	"URI": "https://api.dealerrater.com/",
+	"URL": "https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685",
+	"API": false,
+	"AccessToken": "ACCESSTOKENHERE",
+	"DealerID": "23685",
+	"PaginationOptions": {
+		"Pages": 5,
+		"ResultsPerPage": 10,
+		"Offset": 0
+	}
+}

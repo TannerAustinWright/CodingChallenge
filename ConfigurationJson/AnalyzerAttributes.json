@@ -1,0 +1,247 @@
+﻿[
+  {
+    "Key": "comments",
+    "Rules": [
+      {
+        "Keyword": "awesome",
+        "Weight": 2
+      },
+      {
+        "Keyword": "nice",
+        "Weight": 1
+      },
+      {
+        "Keyword": "impressed",
+        "Weight": 2
+      },
+      {
+        "Keyword": "friendly",
+        "Weight": 2
+      },
+      {
+        "Keyword": "better",
+        "Weight": 2
+      },
+      {
+        "Keyword": "care",
+        "Weight": 1
+      },
+      {
+        "Keyword": "way",
+        "Weight": 1
+      },
+      {
+        "Keyword": "above",
+        "Weight": 1
+      },
+      {
+        "Keyword": "beyond",
+        "Weight": 1
+      },
+      {
+        "Keyword": "expectations",
+        "Weight": 2
+      },
+      {
+        "Keyword": "work",
+        "Weight": -1
+      },
+      {
+        "Keyword": "but",
+        "Weight": -1
+      },
+      {
+        "Keyword": "maybe",
+        "Weight": -1
+      },
+      {
+        "Keyword": "service",
+        "Weight": 1
+      },
+      {
+        "Keyword": "very",
+        "Weight": 1
+      },
+      {
+        "Keyword": "great",
+        "Weight": 2
+      },
+      {
+        "Keyword": "best",
+        "Weight": 2
+      },
+      {
+        "Keyword": "reccomend",
+        "Weight": 2
+      },
+      {
+        "Keyword": "helpful",
+        "Weight": 1
+      },
+      {
+        "Keyword": "definitely",
+        "Weight": 2
+      },
+      {
+        "Keyword": "help",
+        "Weight": 1
+      },
+      {
+        "Keyword": "family",
+        "Weight": 2
+      },
+      {
+        "Keyword": "experience",
+        "Weight": 1
+      },
+      {
+        "Keyword": "care",
+        "Weight": 1
+      },
+      {
+        "Keyword": "amazing",
+        "Weight": 2
+      },
+      {
+        "Keyword": "helped",
+        "Weight": 1
+      },
+      {
+        "Keyword": "love",
+        "Weight": 2
+      },
+      {
+        "Keyword": "professional",
+        "Weight": 1
+      },
+      {
+        "Keyword": "excellent",
+        "Weight": 2
+      },
+      {
+        "Keyword": "knowledgeable",
+        "Weight": 2
+      },
+      {
+        "Keyword": "appreciate",
+        "Weight": 1
+      },
+      {
+        "Keyword": "kind",
+        "Weight": 1
+      },
+      {
+        "Keyword": "easy",
+        "Weight": 1
+      },
+      {
+        "Keyword": "pleased",
+        "Weight": 1
+      },
+      {
+        "Keyword": "issue",
+        "Weight": -1
+      },
+      {
+        "Keyword": "thanks",
+        "Weight": 1
+      },
+      {
+        "Keyword": "reassuring",
+        "Weight": 1
+      },
+      {
+        "Keyword": "dream",
+        "Weight": 2
+      },
+      {
+        "Keyword": "comfortable",
+        "Weight": 1
+      },
+      {
+        "Keyword": "fantastic",
+        "Weight": 2
+      },
+      {
+        "Keyword": "perfect",
+        "Weight": 2
+      },
+      {
+        "Keyword": "courteous",
+        "Weight": 1
+      },
+      {
+        "Keyword": "well",
+        "Weight": 1
+      },
+      {
+        "Keyword": "positive",
+        "Weight": 1
+      },
+      {
+        "Keyword": "exceptionally",
+        "Weight": 1
+      },
+      {
+        "Keyword": "expertise",
+        "Weight": 1
+      },
+      {
+        "Keyword": "reliable",
+        "Weight": 1
+      },
+      {
+        "Keyword": "diligent",
+        "Weight": 2
+      },
+      {
+        "Keyword": "junk",
+        "Weight": -1
+      },
+      {
+        "Keyword": "respectful",
+        "Weight": 1
+      },
+      {
+        "Keyword": "welcoming",
+        "Weight": 1
+      },
+      {
+        "Keyword": "helping",
+        "Weight": 1
+      },
+      {
+        "Keyword": "horrible",
+        "Weight": -1
+      },
+      {
+        "Keyword": "problem",
+        "Weight": -1
+      },
+      {
+        "Keyword": "fees",
+        "Weight": -1
+      },
+      {
+        "Keyword": "charges",
+        "Weight": -1
+      },
+      {
+        "Keyword": "smoothly",
+        "Weight": 1
+      },
+      {
+        "Keyword": "luxurious",
+        "Weight": 2
+      },
+      {
+        "Keyword": "happy",
+        "Weight": 1
+      },
+      {
+        "Keyword": "happier",
+        "Weight": 2
+      }
+    ]
+  }
+]
