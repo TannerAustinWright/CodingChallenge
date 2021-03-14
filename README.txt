@@ -58,6 +58,9 @@
 		Each test class, corresponds to either WebScraper or JsonAnalyzer, and each method is a different equivalence class. There are multile tests 
 		for the methods included in the corresponding class.
 
+		The test classes achieve 100% Line and Condition coverage. Luckily the cyclomatic complexity of this project
+		is not very high.
+
 		-- How to Run: 
 		Click ">CodingChallenge" in the visiual studio debugger to run it in debug, or you can run the executable by going executing the file at
 		"CodingChallenge\bin\Debug\netcoreapp3.1\CodingChallenge.exe" This executable should work across all operating systems.
