@@ -3,19 +3,22 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace CodingChallenge.Utilities
 {
     public class WebScraper : JsonSource
     {
-        private RequestAttribute requestAttribute;
+        private RequestAttribute requestAttribute { get; set; }
 
         public WebScraper(RequestAttribute requestAttribute)
         {
             this.requestAttribute = requestAttribute;
         }
+
         /// <summary>
         /// Sends an Http request to get pages of reviews for a specific URL, and number of
         /// subsequent pages. This method is specifically for review endpoints of DealerRater
@@ -91,6 +94,89 @@ namespace CodingChallenge.Utilities
             foreach (Match match in matches)
             {
                 reviews.Add(new{ comments = match.Groups[1].ToString() });
+            }
+
+            // Return a JSON representation of the object containing the list of reviews.
+            return JsonConvert.SerializeObject(new { reviews = reviews });
+        }
+
+        private async Task<string> GetHTMLAsync()
+        {
+            List<string> endpoints = new List<string>();
+            for (int i = requestAttribute.PaginationOptions.Offset;
+                i < requestAttribute.PaginationOptions.Pages + requestAttribute.PaginationOptions.Offset;
+                i++)
+            {
+
+                string endpoint = "";
+                if (i != 0)
+                {
+                    endpoint = $"/page{i + 1}";
+                }
+
+                endpoints.Add(requestAttribute.URL + endpoint);
+            }
+
+            IEnumerable<Task<string>> htmlTaskQuery =
+                from url in endpoints
+                select GetPageHTMLAsync(url);
+
+            List<Task<string>> htmlTasks = htmlTaskQuery.ToList();
+
+            string htmlConcat = "";
+            while (htmlTasks.Any())
+            {
+                Task<string> finished = await Task.WhenAny(htmlTasks);
+                htmlTasks.Remove(finished);
+                htmlConcat += await finished;
+            }
+            return htmlConcat;
+        }
+
+        private static Task<string> GetPageHTMLAsync(string url)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return Task.FromResult(reader.ReadToEnd());
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Scraping multiple pages is only supported for DealerRater URL's");
+            }
+        }
+
+
+        public async Task<string> getJSONAsync()
+        {
+            // Use getHtml() to requset the text of all pages in a single string.
+            string html = await GetHTMLAsync();
+
+            // Use regex to find the review bodies.
+            Regex regex = new Regex("<p class=\".*review-content.*\".*>([^<]*?)<\\/p>");
+            /*
+            Regex: 
+            <p class=\".*review-content.*\".*>([^<]*?)<\\/p>
+            <p class=                   String literal. The match must be a p tag with a class attribute.
+            \".*review-content.*\"      The class attribute must contain the string "review-content" and can have other classes,
+                                        hence the leading and trailing .*
+            .*>                         The tag may contain other attributes before the content.
+            ([^<]*?)                    The contents of the tag may be any character other than a '<' if you use a '.' the regex will 
+                                        Not match comments that span multiple lines.
+            <\\/p>                      Must also end in a </p> tag.
+            */
+            var matches = regex.Matches(html);
+
+            // Store the text of each review in a list of objects to mimic the structure of the API's JSON.
+            List<object> reviews = new List<object>();
+            foreach (Match match in matches)
+            {
+                reviews.Add(new { comments = match.Groups[1].ToString() });
             }
 
             // Return a JSON representation of the object containing the list of reviews.

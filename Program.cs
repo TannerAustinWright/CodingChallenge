@@ -5,6 +5,7 @@ using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using CodingChallenge.APIModels;
+using System.Diagnostics;
 
 namespace CodingChallenge
 {
@@ -46,11 +47,19 @@ namespace CodingChallenge
             jsonAnalyzer = new JsonAnalyzer<Review>(analyzerAttrs);
 
             //  Extract the list of reviews from the json string by deserializing the object.
-            List<Review> reviews = JsonConvert.DeserializeObject<ReviewCollection>(json.getJSON()).reviews;
+            var stopwatch = Stopwatch.StartNew();
+            List<Review> reviewsAsync = JsonConvert.DeserializeObject<ReviewCollection>(json.getJSONAsync().Result).reviews;
+            stopwatch.Stop();
+            Console.WriteLine($"Async Runtime: {stopwatch.Elapsed}");
+
+            stopwatch.Restart();
+            List<Review> reviewsSync = JsonConvert.DeserializeObject<ReviewCollection>(json.getJSON()).reviews;
+            stopwatch.Stop();
+            Console.WriteLine($"Sync Runtime: {stopwatch.Elapsed}");
 
             //  Run the analyzer passing the reviews as a JSON object string imitating the format of 
             //  the API response (in case future implementation is possible).
-            jsonAnalyzer.runRules(JsonConvert.SerializeObject(reviews));
+            jsonAnalyzer.runRules(JsonConvert.SerializeObject(reviewsAsync));
 
             //  Get the results from the analyzer object and output them to the console.
             foreach(KeyValuePair<Review, int> kvp in jsonAnalyzer.getTop(3))
