@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace CodingChallenge.Utilities
@@ -27,7 +28,7 @@ namespace CodingChallenge.Utilities
         /// <param name="jsonString"> The JSON representation of a collection of reviews as a string. </param>
         public void outputWordCount(string jsonString)
         {
-            //  Convert the JSON string into objects.
+            //  Convert the JSON string into objects (reviews).
             collection = JsonConvert.DeserializeObject<List<t>>(jsonString);
 
             //  Iterate through each review
@@ -41,9 +42,20 @@ namespace CodingChallenge.Utilities
 
                 propertiesToInclude.ForEach(propertyName =>
                 {
-                    //  Use reflection and the provided rule to determine the property to score.
-                    var propertyInfo = item.GetType().GetProperty(propertyName);
-                    var propertyContents = propertyInfo.GetValue(item, null);
+                    //  Use reflection and the provided rule to determine the property to count words for.
+                    object propertyContents = new object();
+                    
+                    try
+                    {
+                        var propertyInfo = item.GetType().GetProperty(propertyName);
+                        propertyContents = propertyInfo.GetValue(item, null);
+                    } 
+                    catch 
+                    {
+                        throw new Exception("Null reference exception encountered during reflection.");
+                    }
+
+                    if (propertyContents == null) throw new Exception($"Object to analyze has no property named {propertyName}");
 
                     //  Iterate through each word in a single review
                     Regex splitter = new Regex(@"[a-zA-Z]+");
@@ -135,18 +147,21 @@ namespace CodingChallenge.Utilities
             //  REGEX to capture only word characters
             Regex splitter = new Regex(@"[a-zA-Z]+");
 
-            //  Use reflection and the provided rule to determine the property to score.
-            var propertyName = rule.Key;
-            var propertyInfo = item.GetType().GetProperty(propertyName);
             object propertyContents;
+            var propertyName = rule.Key;
+
+            //  Use reflection and the provided rule to determine the property to score.
             try
             {
+                var propertyInfo = item.GetType().GetProperty(propertyName);
                 propertyContents = propertyInfo.GetValue(item, null);
-            } 
-            catch (Exception e)
-            {
-                throw e;
             }
+            catch
+            {
+                throw new Exception("Null reference exception encountered during reflection.");
+            }
+
+            if (propertyContents == null) throw new Exception($"Object to analyze has no property named {propertyName}");
 
             //  Iterate each word, and if included add the weight to the total score. (may be negative)
             foreach (Match word in splitter.Matches(propertyContents.ToString()))

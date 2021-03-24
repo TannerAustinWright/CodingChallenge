@@ -16,6 +16,7 @@ namespace CodingChallenge.Utilities
         {
             this.requestAttribute = requestAttribute;
         }
+
         /// <summary>
         /// Sends an Http request to get pages of reviews for a specific URL, and number of
         /// subsequent pages. This method is specifically for review endpoints of DealerRater
@@ -37,6 +38,7 @@ namespace CodingChallenge.Utilities
                 string endpoint = "";
                 if (i != 0)
                 {
+                    if (!requestAttribute.URL.Contains("www.dealerrater.com")) throw new Exception("Scraping multiple pages is only supported for DealerRater URL's");
                     endpoint = $"/page{i + 1}";
                 }
                 // Request the page at the endpoint, read the text from the response as a string, and
@@ -53,10 +55,9 @@ namespace CodingChallenge.Utilities
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Scraping multiple pages is only supported for DealerRater URL's");
+                    throw e;
                 }
             }
-
             return html;
         }
 

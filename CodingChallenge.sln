@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge", "CodingChallenge.csproj", "{00CC27C2-909D-4193-A71B-1A9D59CAF8FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingChallenge", "CodingChallenge.csproj", "{00CC27C2-909D-4193-A71B-1A9D59CAF8FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallengeUnitTests", "..\CodingChallengeUnitTests\CodingChallengeUnitTests.csproj", "{EC42B203-E04F-4BFA-9E7F-5B11A91F0D79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallengeTests", "..\CodingChallengeTests\CodingChallengeTests.csproj", "{76153C2E-E1F4-41BF-AF93-0B276084E9A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{00CC27C2-909D-4193-A71B-1A9D59CAF8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00CC27C2-909D-4193-A71B-1A9D59CAF8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00CC27C2-909D-4193-A71B-1A9D59CAF8FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC42B203-E04F-4BFA-9E7F-5B11A91F0D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC42B203-E04F-4BFA-9E7F-5B11A91F0D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC42B203-E04F-4BFA-9E7F-5B11A91F0D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC42B203-E04F-4BFA-9E7F-5B11A91F0D79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76153C2E-E1F4-41BF-AF93-0B276084E9A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76153C2E-E1F4-41BF-AF93-0B276084E9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76153C2E-E1F4-41BF-AF93-0B276084E9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76153C2E-E1F4-41BF-AF93-0B276084E9A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
